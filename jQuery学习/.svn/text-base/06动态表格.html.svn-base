@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.active{
+				color: blue;
+				font-weight: 900;
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		</style>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("button").click(function(){
+					var tr0 = $("<tr></tr>");
+					var td1 = $("<td></td>");
+					var td2 = $("<td></td>");
+					var td3 = $("<td></td>");
+					var td4 = $("<td><a href='#'>删除</a></td>");
+					td1.html($("input").eq(0).val()).appendTo(tr0);
+					td2.html($("input").eq(1).val()).appendTo(tr0);
+					td3.html($("input").eq(2).val()).appendTo(tr0);
+					td4.appendTo(tr0);
+					tr0.attr("align","center").appendTo($("table"));
+					td4.click(function(){
+						tr0.remove();
+					})
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<input type="text" placeholder="ID" />
+		<input type="text" placeholder="名字" />
+		<input type="text" placeholder="手机" />
+		<button>保存</button>
+		<table width="600" border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Tel</th>
+				<th>操作</th>
+			</tr>
+		</table>
+	</body>
+</html>

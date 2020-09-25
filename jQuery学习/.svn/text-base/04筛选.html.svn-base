@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.12.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//获取第N个元素,从0开始
+				$(".list li").eq(0).css("color","red");
+				
+				//检查当前的元素是否含有某个特定的类，
+				console.log($(".list").hasClass("list2"));
+				
+				//删除与指定表达式匹配的元素
+				$(".list li").not(".li4").css("font-size","30px");
+				
+				//取得一个包含匹配的元素集合中每一个元素的所有子元素的元素集合。
+				$(".box").children("p").css("color","red");
+				
+				//搜索所有与指定表达式匹配的元素。这个函数是找出正在处理的元素的后代元素的好方法。
+				$(".box").find("p").css("background","green");
+				
+				//取得一个包含匹配的元素集合中每一个元素的所有唯一同辈元素的元素集合。
+				$(".li4").siblings("li").css("background","blue");
+				
+				//取得一个包含着所有匹配元素的唯一父元素的元素集合。
+				console.log($(".li4").parent());
+				
+				//取得一个包含着所有匹配元素的祖先元素的元素集合（不包含根元素）。
+				console.log($(".li4").parents("body"));
+				
+				
+			})
+		</script>
+	</head>
+	<body>
+		<ul class="list list2">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li class="li4">4</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+		<div class="box">
+			<h3>
+				<p>hello word</p>
+			</h3>
+			<p>hello word2</p>
+		</div>
+	</body>
+</html>

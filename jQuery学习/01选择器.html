@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.12.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+//			document.addEventListener("DOMContentLoaded",function(){
+//				var btn = document.querySelector("#btn");
+//				var p1 = document.querySelector(".p1")
+//				btn.onclick = function(){
+//					p1.style.color = "red";
+//				}
+//			})
+			
+			//文档就绪写法
+			$(function(){
+				//根据给定的ID匹配一个元素。
+				$("#pp").css("color","red");
+				$("#pp").css("font-size","30px");
+				
+				//根据给定的类匹配元素。
+				$(".p1").css("color","blue");
+				
+				//根据给定的元素名匹配所有元素
+				$("p").css("background","pink");
+				
+				//*匹配所有元素
+				$("*").css("margin",0);
+				
+				//将每一个选择器匹配到的元素合并后一起返回。
+				$("#pp,.p1").css("font-weight",900);
+				
+				//在给定的祖先元素下匹配所有的后代元素
+				$(".box span").css("background","blue");
+				
+				//在给定的父元素下匹配所有的子元素
+				$(".box>span").css("color","white");
+				
+				//匹配其父元素下的第N个子或奇偶元素
+				$(".list li:nth-child(-n+3)").css("background","red");
+//				$(".list li:last-child").css("background","red");
+//				$(".list li:first-child").css("background","red");
+				
+			})
+		</script>
+	</head>
+	<body>
+		<p id="pp">肯定就是犯贱的书法家客户端发送客户交付</p>
+		<p class="p1">的实际花费巨大横幅技术开发环境</p>
+		<div class="box">
+			<span>hello word</span>
+		</div>
+		<ul class="list">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+		<button id="btn">按钮</button>
+	</body>
+</html>

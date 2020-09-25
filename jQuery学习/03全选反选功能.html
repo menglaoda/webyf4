@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-1.12.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".v4").click(function(){
+					if($(this).prop("checked")==true){
+						for(var i=0;i<$("input").length-2;i++){
+							$("input").eq(i).prop("checked",true);
+						}
+					}else{
+						for(var i=0;i<$("input").length-2;i++){
+							$("input").eq(i).prop("checked",false);
+						}
+					}
+				})
+				$(".v5").click(function(){
+					for(var i=0;i<$("input").length-2;i++){
+						if($("input").eq(i).prop("checked")==true){
+							$("input").eq(i).prop("checked",false);
+						}else{
+							$("input").eq(i).prop("checked",true);
+						}
+					}					
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<h3>请选择你的兴趣爱好：</h3>
+		<input type="checkbox" />打游戏
+		<br />
+		<input type="checkbox" />看直播
+		<br />
+		<input type="checkbox" />打瞌睡
+		<br />
+		<br />
+		<input class="v4" type="checkbox" />全选
+		<input class="v5" type="checkbox" />反选
+	</body>
+</html>

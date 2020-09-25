@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 1000px;
+				margin: 70px auto;
+				border: solid 1px black;
+			}
+			.box1{
+				position: relative;
+			}
+			.img1{
+				position: absolute;
+				top: -50px;
+				left: 50%;
+				margin-left: -25px;
+				height: 50px;
+				width: 50px;
+				display: none;
+			}
+			.img2{
+				position: absolute;
+				top: -50px;
+				left: 50%;
+				margin-left: -25px;
+				height: 50px;
+				width: 50px;
+				display: none;
+			}
+			.box1>div{
+				width: calc(100% / 3);
+				height: 50px;
+				float: left;
+				position: relative;
+			}
+			.box1 button{
+				width: 100%;
+				height: 100%;
+				outline: medium;
+				font-size: 24px;
+			}
+			.box1 input{
+				width: 100%;
+				height: 100%;
+				outline: medium;
+				font-size: 24px;
+			}
+			.xt1,.xt2{
+				height: 10px;
+				background: red;
+				position: absolute;
+				top: 40px;
+				left: 0px;
+				width: 100%;
+				transition: all 1s;
+			}
+			.xt2{
+				background: blue;
+			}
+			.box2{
+				clear: both;
+				min-height: 200px;
+				padding:  10px;
+			}
+			.box2 p{
+				margin-top: 10px;
+			}
+			.box3{
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+				background: rgba(0,0,0,0.5);
+				display: none;
+			}
+			.box4{
+				width: 440px;
+				position: absolute;
+				top: 200px;
+				left: 50%;
+				margin-left: -220px;
+				background: white;
+				padding: 20px 20px 10px;
+				border-radius: 10px;
+			}
+			.box4 button{
+				width: 80px;
+				height: 30px;
+				float: left;
+				margin-right: 10px;
+				margin-bottom: 10px;
+				font-size: 18px;
+			}
+			.box4 button:nth-child(5n){
+				margin-right: 0px;
+			}
+		</style>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var str = "若烟、半梦、雅绿、冰蓝、灵槐、平安、书翠、翠风、香巧、代云、梦曼、幼翠、友巧、听寒、梦柏、醉易、访旋、亦玉、凌萱、访卉、怀亦、笑蓝、春翠、靖柏、夜蕾、冰夏、梦松、书雪、乐枫、念薇、靖雁、寻春、恨山、从寒、忆香";
+				var arr = str.split("、");
+				console.log(arr);
+				//初始化名字
+				name();
+				function name(){
+					var n1 = Math.floor(Math.random()*arr.length);
+					var n3 = 0;
+					num(n1);
+					function num(n){
+						var n2 = Math.floor(Math.random()*arr.length);
+						n1==n2?num(n):n3=n2;
+					}
+					$(".name1").html(arr[n1]);
+					$(".name2").html(arr[n3]);
+				}
+				
+				//切换名字
+				var myname = 0;
+				var obj =0;
+				$(".box1 button").on("click",tabname);
+				function tabname(){
+					$(".box3").css("display","block");
+					myname = $(this).parent().siblings("div").find("button").html();
+					obj = $(this);
+				}
+				
+				$.each(arr, function(i,item) {
+					var btn =  $("<button></button>");
+					btn.html(arr[i]);
+					btn.appendTo($(".box4"));
+					btn.on("click",fn1);
+				});
+				function fn1(){
+					if($(this).html()==myname){
+						alert("名字冲突了！");
+					}else{
+						obj.html($(this).html());
+						$(".box3").css("display","none");
+					}
+				}
+				
+				//开始pk
+				$(".pk").click(function(){
+					$(".box2").html("");
+					$(".box1 img").css("display","none");
+					$(".box1 button").off();
+					$(".pk").attr("disabled",true);
+					$(".xt1,.xt2").css({"width":"100%","transition":"none"});
+					var i=0;
+					if(Math.round(Math.random()*1)==0){
+						var j = 0;
+					}else{
+						var j = 1;
+					}
+					var x1 = 100;
+					var x2 = 100;
+					var timer = setInterval(function(){
+						$(".xt1,.xt2").css({"transition":"all 1s"});
+						var str1 = 0;
+						$.ajax({
+							type:"get",
+							url:"11.json",
+							async:false,
+							success:function(res){
+								var a1 = Math.floor(Math.random()*res.length);
+								str1 = res[a1];
+							}
+						});
+						i++;
+						j++;
+						//小招数[5,15]，大招[15,25]；
+						var re = /大招/;
+						console.log(str1);
+						if(re.test(str1)){
+							var s = Math.round(Math.random()*10+15);
+						}else{
+							var s = Math.round(Math.random()*10+5);
+						}
+						var p1 = $("<p></p>");
+						if(j%2==0){
+							p1.html("第"+i+"轮："+"["+$(".name2").html()+"]"+str1+s+"点血量。")
+							x1-=s;
+							
+						}else{
+							p1.html("第"+i+"轮："+"["+$(".name1").html()+"]"+str1+s+"点血量。")
+							x2-=s;
+							
+						}
+						p1.appendTo($(".box2"));
+						console.log(x1+","+x2);
+						if(x1<=0){
+							clearInterval(timer);
+							var p2 = $("<p></p>");
+							p2.html($(".name1").html()+"筋疲力尽，挂掉了！").css("color","red");
+							p2.appendTo($(".box2"));
+							$(".img1").attr("src","img/a1.gif");
+							$(".img2").attr("src","img/a2.gif");
+							$(".box1 img").css("display","block");
+							$(".box1 button").on("click",tabname);
+							$(".pk").removeAttr("disabled");
+							$(".xt1").css("width",0+"%");
+						}else{
+							$(".xt1").css("width",x1+"%");
+						}
+						if(x2<=0){
+							clearInterval(timer);
+							var p2 = $("<p></p>");
+							p2.html($(".name2").html()+"筋疲力尽，挂掉了！").css("color","red");
+							p2.appendTo($(".box2"));
+							$(".img1").attr("src","img/a2.gif");
+							$(".img2").attr("src","img/a1.gif");
+							$(".box1 img").css("display","block");
+							$(".box1 button").on("click",tabname);
+							$(".pk").removeAttr("disabled");
+							$(".xt2").css("width",0+"%");
+						}else{
+							$(".xt2").css("width",x2+"%");
+						}
+					},1000)
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="box1">
+				<div>
+					<button class="name1">张三</button>
+					<div class="xt1"></div>
+					<img class="img1" src="img/a1.gif" />
+				</div>
+				<div>
+					<input  type="button" class="pk" value="开始pK" />
+				</div>
+				<div>
+					<button class="name2">李四</button>
+					<div class="xt2"></div>
+					<img class="img2" src="img/a2.gif" />
+				</div>
+				
+				
+				
+				
+			</div>
+			<div class="box2"></div>
+			<div class="box3">
+				<div class="box4"></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$.ajax({
+					type:"get",
+					url:"pc-code.json",
+					async:true,
+					success:function(res){
+						console.log(res);
+						$.each(res, function(i,item) {
+							var op = $("<option></option>");
+							op.html(item.name).appendTo($(".s1"));
+						});
+						$.each(res[0].children, function(i,item) {
+							var op = $("<option></option>");
+							op.html(item.name).appendTo($(".s2"));
+						});
+					}
+				});
+				$(".s1").change(function(){
+					console.log($(".s1").val());
+					$(".s2").html("");
+					$.ajax({
+						type:"get",
+						url:"pc-code.json",
+						async:true,
+						success:function(res){
+							$.each(res, function(i,item) {
+								if(res[i].name==$(".s1").val()){
+									$.each(res[i].children, function(i1,item1) {
+										var op = $("<option></option>");
+										op.html(item1.name).appendTo($(".s2"));
+									});
+								}
+							});
+						}
+					});
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<label>请选择省份：</label>
+		<select class="s1">
+		</select>
+		<br />
+		<label>请选择城市：</label>
+		<select class="s2"></select>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".btn").click(function(){
+					$.ajax({
+						type:"get",
+						url:"index.json",
+						async:true,
+						success:function(res){
+							console.log(res);
+							//通用例遍方法，可用于例遍对象和数组。
+//							$.each(res, function(i,item) {
+//								if(i==1){
+//									console.log(item.name);
+//								}
+//							});
+
+							$(res[0]).each(function(i,item){
+//								
+									console.log(item.name)
+//								
+							})
+						},
+						error:function(){
+							
+						}
+					});
+				})
+				//将一个数组中的元素转换到另一个数组中。
+				var arr =  $.map( [0,1,2], function(n){
+				  return n + 4;
+				});
+				console.log(arr);
+			})
+		</script>
+	</head>
+	<body>
+		<button class="btn">anniu</button>
+	</body>
+</html>

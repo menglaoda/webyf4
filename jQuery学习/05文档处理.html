@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//创建标签
+				var oh3 = $("<h3></h3>");
+				oh3.html("hehe");
+				//向每个匹配的元素内部追加内容。
+//				$(".box").append(oh3);
+				//oh3.appendTo($(".box"));
+				
+				//在每个匹配的元素之后插入内容。
+				//$(".box").after(oh3);
+				
+				//在每个匹配的元素之前插入内容。
+				//$(".box").before(oh3);
+				
+				//将所有匹配的元素替换成指定的HTML或DOM元素。
+				//$(".a1").replaceWith(oh3);
+				
+				//用匹配的元素替换掉所有 selector匹配到的元素。
+				//oh3.replaceAll($(".box2 p"));
+				
+				//从DOM中删除所有匹配的元素。
+				//$(".box2").remove();
+				
+				
+				$(".btn").click(function(){
+					console.log(1);
+				})
+				
+				//克隆匹配的DOM元素并且选中这些克隆的副本。
+				var a2 = $(".btn").clone(true);
+				$(".box2").append(a2);	
+				
+				$(".box2 p").click(function(){
+					console.log($(this).html());
+					console.log($(this).index());//获取索引
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<p class="p1">hello word</p>
+			<a class="a1" href="#">百度</a>
+		</div>
+		<button class="btn">按钮</button>
+		<div class="box2">
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
+			<p>4</p>
+			<p>5</p>
+		</div>
+	</body>
+</html>

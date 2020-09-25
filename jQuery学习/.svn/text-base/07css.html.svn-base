@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 200px;
+				height: 200px;
+				background: red;
+				position: relative;
+				margin: 100px auto;
+				overflow: hidden;
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				font-size: 30px;
+				color: white;
+				margin: 10px auto;
+				position: absolute;
+				top: 50px;
+				left: 50px;
+			}
+			body{
+				height: 5000px;
+				/*width: 3000px;*/
+			}
+		</style>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function(){
+				//访问匹配元素的样式属性。
+				console.log($(".box").css("font-size"));
+				//$(".box").css("color","green");
+				$(".box").css({"color":"blue","background":"gold"});
+				
+				//获取匹配元素在当前视口的相对偏移。
+				console.log($(".box").offset().left);
+				console.log($(".box").offset().top);
+				
+				//获取匹配元素相对父元素的偏移。
+				console.log($(".box").position().left);
+				console.log($(".box").position().top);
+				
+				//获取匹配元素相对滚动条顶部的偏移。
+				$(window).scroll(function(){
+					console.log($("html,body").scrollTop());
+					//获取匹配元素相对滚动条左侧的偏移。
+					console.log($("html,body").scrollLeft());
+				})
+				
+				//取得匹配元素当前计算的高度值（px）。
+				console.log($(window).height());
+				
+				//获取第一个匹配元素内部区域高度（包括补白、不包括边框）。
+				console.log($(".box").innerHeight());
+				
+				//获取第一个匹配元素外部高度（默认包括补白和边框）。
+				console.log($(".box").outerHeight());
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="box">hello word</div>
+		</div>
+	</body>
+</html>

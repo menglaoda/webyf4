@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 1002px;
+				margin: 50px auto;
+			}
+			.hd{
+				height: 50px;
+				line-height: 50px;
+				border-bottom: solid 1px black;
+			}
+			.hd h3{
+				border-bottom: solid 1px red;
+				width: 150px;
+				text-align: center;
+			}
+			.list{
+				list-style: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			.list li{
+				margin-bottom: 15px;
+			}
+			.list li:nth-child(1){	
+				height: 50px;
+				line-height: 50px;
+			}
+			.list li>div{
+				float:left ;
+				width: 120px;
+				text-align: center;
+			}
+			.list li>div:nth-child(2){
+				width: 200px;
+			}
+			.list li>div:nth-child(3){
+				width: 200px;
+			}
+			.list img{
+				width: 120px;
+				height: 70px;
+				display: block;
+				margin: 15px auto;
+			}
+			.list li:nth-child(n+2){
+				height: 100px;
+				line-height: 100px;
+				border: solid 1px #ccc;
+				background: #f7f7f7;
+			}
+			.list li:nth-child(n+2) .info{
+				line-height: 20px;
+				margin-top: 30px;
+			}
+			.jian,.jia{
+				border: solid 1px #333;
+				width: 20px;
+				height: 20px;
+				display: inline-block;
+				line-height: 20px;
+				text-align: center;
+				cursor: pointer;
+			}
+			.num{
+				margin: 0px 5px;
+			}
+			.delete{
+				cursor: pointer;
+				color: blue;
+			}
+			.list li:last-child{
+				font-size: 30px;
+				border: none;
+				background: white;
+				height: auto;
+				line-height: 30px;
+				text-align: right;
+			}
+			.list li:last-child h3{
+				font-weight: 500;
+			}
+			.zj{
+				color: red;
+				font-size: 50px;
+				margin: 0px 10px;
+			}
+		</style>
+		<script src="jquery-1.12.0.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			$(function(){
+				//点击加号
+				$(".jia").click(function(){
+					var n1 = parseInt($(this).siblings(".num").html());//初始的数量
+					$(this).siblings(".num").html(n1+1);//修改数量
+					var n2 = parseInt($(this).siblings(".num").html());//新的数量
+					var n3 = $(this).parent().siblings(".dj").html();//单价
+					$(this).parent().siblings(".je").html((n2*n3).toFixed(2));//修改金额
+					console.log($(this).parent().siblings("div").find(".xz").prop("checked"));
+					if($(this).parent().siblings("div").find(".xz").prop("checked")){
+						//计算总价
+						fn1();
+					}
+				})
+				//点击减号
+				$(".jian").click(function(){
+					var n1 = parseInt($(this).siblings(".num").html());//初始的数量
+					if(n1>1){
+						$(this).siblings(".num").html(n1-1);//修改数量
+						var n2 = parseInt($(this).siblings(".num").html());//新的数量
+						var n3 = $(this).parent().siblings(".dj").html();//单价
+						$(this).parent().siblings(".je").html((n2*n3).toFixed(2));//修改金额
+						if($(this).parent().siblings("div").find(".xz").prop("checked")){
+							//计算总价
+							fn1();
+						}
+					}
+				})
+				//点击全选
+				$(".qx").click(function(){
+					var s = 0;
+					if($(this).prop("checked")){
+						$.each($(".xz"), function(i,item) {
+							$(".xz").eq(i).prop("checked",true);
+							s+=parseFloat($(".xz").eq(i).parent().siblings(".je").html());
+						});
+						$(".zj").html(s.toFixed(2));
+					}else{
+						$.each($(".xz"), function(i,item) {
+							$(".xz").eq(i).prop("checked",false);
+						});
+						$(".zj").html(s.toFixed(2));
+					}
+					
+				})
+				//点击单个选中
+				$(".xz").click(function(){
+					if($(this).prop("checked")){
+						//改变全选的状态
+						var s2 = 0;
+						$.each($(".xz"), function(i,item) {
+							if($(".xz").eq(i).prop("checked")){
+								s2++;
+							}else{
+								$(".qx").prop("checked",false);
+								return false;
+							}
+						});
+						if(s2==$(".xz").length){
+							$(".qx").prop("checked",true);
+						}
+					}else{
+						$(".qx").prop("checked",false);	
+					}
+					fn1();
+				})
+				//点击删除
+				$(".delete").click(function(){
+					$(this).parent().remove();
+					fn1();
+					//改变全选的状态
+					var s2 = 0;
+					$.each($(".xz"), function(i,item) {
+						if($(".xz").eq(i).prop("checked")){
+							s2++;
+						}else{
+							$(".qx").prop("checked",false);
+							return false;
+						}
+					});
+					if(s2==$(".xz").length){
+						$(".qx").prop("checked",true);
+					}
+				})
+				
+				//计算总价
+				function fn1(){
+					var s = 0;
+					$.each($(".xz"), function(i,item) {
+						if($(".xz").eq(i).prop("checked")){
+							s+=parseFloat($(".xz").eq(i).parent().siblings(".je").html());
+						}
+					});
+					$(".zj").html(s.toFixed(2))
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="hd"><h3>全部商品</h3></div>
+			<ul class="list">
+				<li>
+					<div><input class="qx" type="checkbox" />全选</div>
+					<div>商品</div>
+					<div>商品信息</div>
+					<div>单价</div>
+					<div>数量</div>
+					<div>金额</div>
+					<div>操作</div>
+				</li>
+				<li>
+					<div><input class="xz" type="checkbox" /></div>
+					<div><img src="img/paopao1.png" /></div>
+					<div class="info">发的实际交付贷款首付款觉得十分艰苦撒旦大家是否</div>
+					<div class="dj">99.99</div>
+					<div><b class="jian">-</b><span class="num">1</span><b class="jia">+</b></div>
+					<div class="je">99.99</div>
+					<div class="delete">删除</div>
+				</li>
+				<li>
+					<div><input  class="xz"  type="checkbox" /></div>
+					<div><img src="img/paopao1.png" /></div>
+					<div class="info">发的实际交付贷款首付款觉得十分艰苦撒旦大家是否</div>
+					<div class="dj">99.99</div>
+					<div><b class="jian">-</b><span class="num">1</span><b class="jia">+</b></div>
+					<div class="je">99.99</div>
+					<div class="delete">删除</div>
+				</li>
+				<li>
+					<div><input  class="xz"  type="checkbox" /></div>
+					<div><img src="img/paopao1.png" /></div>
+					<div class="info">发的实际交付贷款首付款觉得十分艰苦撒旦大家是否</div>
+					<div class="dj">18.88</div>
+					<div><b class="jian">-</b><span class="num">1</span><b class="jia">+</b></div>
+					<div class="je">18.88</div>
+					<div class="delete">删除</div>
+				</li>
+				<li>
+					<div><input  class="xz"  type="checkbox" /></div>
+					<div><img src="img/paopao1.png" /></div>
+					<div class="info">发的实际交付贷款首付款觉得十分艰苦撒旦大家是否</div>
+					<div class="dj">66.66</div>
+					<div><b class="jian">-</b><span class="num">1</span><b class="jia">+</b></div>
+					<div class="je">66.66</div>
+					<div class="delete">删除</div>
+				</li>
+				<li>
+					<h3><span>总价：</span><b class="zj">0.00</b><span>元</span></h3>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

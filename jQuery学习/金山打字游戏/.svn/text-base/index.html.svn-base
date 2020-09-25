@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			html,body{
+				height: 100%;
+			}
+			body{
+				background: url(img/dz2.jpg) 0px 0px/cover;
+			}
+			.box{
+				position: fixed;
+				bottom: 0px;
+				left: 0px;
+				width: 100%;
+				height: 40px;
+				background: black;
+				z-index: 99;
+			}
+			.startgame{
+				width: 120px;
+				height: 36px;
+				background: url(img/stop.png) 0px 0px/cover;
+				position: absolute;
+				top: 2px;
+				left: 30px;
+				line-height: 36px;
+				text-align: center;
+				cursor: pointer;
+			}
+			.box1{
+				width: 120px;
+				height: 152px;
+				background: url(img/fs.png) no-repeat 0px 0px/100%;
+				position: fixed;
+				bottom: 50px;
+				right: 260px;
+				text-align: center;
+			}
+			.box2{
+				right: 130px;
+			}
+			.box3{
+				right: 0px;
+			}
+			.box1 h3{
+				font-size: 16px;
+				margin-top: 30px;
+			}
+			.box1 span{
+				color: orangered;
+				font-size: 30px;
+			}
+			.cg,.sb{
+				width: 550px;
+				height: 414px;
+				background: url(img/cg.png);
+				position: fixed;
+				top: -414px;
+				left: 50%;
+				margin-left: -275px;
+				transition: all 2s;
+				z-index: 99;
+			}
+			.next-btn,.reset-btn{
+				width: 100px;
+				height: 40px;
+				position: absolute;
+				top: 242px;
+				left: 235px;
+				cursor: pointer;
+			}
+			.reset-btn{
+				width: 93px;
+				height: 36px;
+				left: 205px;
+			}
+			.sb{
+				width: 520px;
+				margin-left: -260px;
+				background: url(img/sp1.png);
+			}
+			.active{
+				position: fixed;
+				top: -100px;
+				left: 0px;
+				width: 100px;
+			}
+			.obox{
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+				background: rgba(0,0,0,0.5);
+				z-index: 50;
+				display: none;
+			}
+		</style>
+		<script src="../jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var str = "ABCDEFGHIJKLNMOPQRSTUVWXYZ";
+				var arr = str.split("");
+				var score = 0;
+				var losescore = 0;
+				var Gamelevel = 1;
+				var speed = 10000;
+				//点击开始游戏
+				$(".startgame").on("click",game);
+				function game(){
+					$(".startgame").off();
+					$(window).on("keyup",up);
+					$(".startgame").css({"opacity":0.5,"cursor":"not-allowed"});
+					for(var i=0;i<2+Gamelevel;i++){
+						creatimg(speed);
+					}
+				}
+				
+				//创建图片
+				function creatimg(speed){
+					var n1 = Math.floor(Math.random()*arr.length);
+					var $img = $("<img />");
+					$img.attr("src","img/"+arr[n1]+".png");
+					$img.addClass("active");
+					$img.css("top",-Math.floor(Math.random()*100));
+					$img.css("left",Math.floor(Math.random()*($(window).width()-100)));
+					$img.appendTo($("body"));
+					$img.attr("name",arr[n1]);
+					arr.splice(n1,1);
+					$img.animate({
+						top:$(window).height()-40
+					},speed,"linear",function(){
+						arr.push($img.attr("name"));
+						losescore++;
+						$(".losescore").html(losescore);
+						$img.remove();
+						creatimg(speed);
+						if(losescore>=5){
+							over();
+						}
+					})
+				}
+				
+				//松开键盘
+				$(window).off("keyup",up);
+				function up(e){
+					var a1 = String.fromCharCode(e.keyCode);
+					var str1 = "";
+					$.each($("img"), function(i,item) {
+						str1+=$("img").eq(i).attr("name");
+					});
+					//失分
+					if(str1.indexOf(a1)==-1 &&e.keyCode!=13){
+						losescore++;
+						if(losescore>=5){
+							over();
+						}
+						$(".losescore").html(losescore);
+					}
+					//得分
+					$.each($("img"), function(i,item) {
+						if($("img").eq(i).attr("name")==a1){
+							score++;
+							$(".score").html(score);
+							arr.push($("img").eq(i).attr("name"));
+							$("img").eq(i).stop();
+							$("img").eq(i).remove();
+							if(score<15){
+								creatimg(speed);
+							}else{
+								tg()
+							}
+						}
+					});	
+				}
+				//通关
+				function tg(){
+					$(window).off("keyup");
+					$("img").stop();
+					$(".obox").show();
+					$(".cg").css("top",0);					
+				}
+				//闯关失败
+				function over(){
+					$(window).off("keyup");
+					$("img").stop();
+					$(".obox").show();
+					$(".sb").css("top",0);
+				}
+				//下一关
+				$(".next-btn").click(function(){
+					score = 0;
+					losescore = 0;
+					Gamelevel++;
+					$(".score").html(score);
+					$(".losescore").html(losescore);
+					$(".Gamelevel").html(Gamelevel);
+					arr = str.split("");
+					$("img").remove();
+					$(".obox").hide();
+					$(".cg").css("top",-414);
+					speed-=500;
+					if(Gamelevel>6){
+						for(var i=0;i<8;i++){
+							creatimg(speed);
+						}
+					}else{
+						for(var i=0;i<2+Gamelevel;i++){
+							creatimg(speed);
+						}
+					}
+					$(window).on("keyup",up);
+				})
+				//重新开始
+				$(".reset-btn").click(function(){
+					score = 0;
+					losescore = 0;
+					Gamelevel=1;
+					$(".score").html(score);
+					$(".losescore").html(losescore);
+					$(".Gamelevel").html(Gamelevel);
+					arr = str.split("");
+					$("img").remove();
+					$(".obox").hide();
+					$(".sb").css("top",-414);
+					speed=10000;
+					for(var i=0;i<2+Gamelevel;i++){
+						creatimg(speed);
+					}
+					$(".startgame").css({"opacity":0.5,"cursor":"not-allowed"});
+					$(window).on("keyup",up);
+				})
+				//回车键
+				$(window).keydown(function(e){
+					if(e.keyCode==13){
+						console.log($(".cg").css("top"));
+						console.log($(".sb").css("top"));
+						if(parseFloat($(".cg").css("top"))==0){
+							score = 0;
+							losescore = 0;
+							Gamelevel++;
+							$(".score").html(score);
+							$(".losescore").html(losescore);
+							$(".Gamelevel").html(Gamelevel);
+							arr = str.split("");
+							$("img").remove();
+							$(".obox").hide();
+							$(".cg").css("top",-414);
+							speed-=500;
+							if(Gamelevel>6){
+								for(var i=0;i<8;i++){
+									creatimg(speed);
+								}
+							}else{
+								for(var i=0;i<2+Gamelevel;i++){
+									creatimg(speed);
+								}
+							}
+							$(window).on("keyup",up);
+						}
+						if(parseFloat($(".sb").css("top"))==0){
+							score = 0;
+							losescore = 0;
+							Gamelevel=1;
+							$(".score").html(score);
+							$(".losescore").html(losescore);
+							$(".Gamelevel").html(Gamelevel);
+							arr = str.split("");
+							$("img").remove();
+							$(".obox").hide();
+							$(".sb").css("top",-414);
+							speed=10000;
+							for(var i=0;i<2+Gamelevel;i++){
+								creatimg(speed);
+							}
+							$(".startgame").css({"opacity":0.5,"cursor":"not-allowed"});
+							$(window).on("keyup",up);
+						}
+					}
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox"></div>
+		<div class="box">
+			<div class="startgame">开始游戏</div>
+		</div>
+		<div class="box1">
+			<h3>关卡</h3>
+			<span class="Gamelevel">1</span>
+		</div>
+		<div class="box1 box2">
+			<h3>失分</h3>
+			<span class="losescore">0</span>
+		</div>
+		<div class="box1 box3" >
+			<h3>分数</h3>
+			<span class="score">0</span>
+		</div>
+		<div class="cg">
+			<div class="next-btn"></div>
+		</div>
+		<div class="sb">
+			<div class="reset-btn"></div>
+		</div>
+	</body>
+</html>

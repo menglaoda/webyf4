@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: #C6E2FF;
+			}
+			.obox{
+				width: 480px;
+				height: 260px;
+				margin: 100px auto;
+				background: white;
+			}
+			.list{
+				height: 42px;
+				list-style: none;
+				background: #C6E2FF;
+			}
+			.list li{
+				height: 42px;
+				width: 105px;
+				float: left;
+				text-align: center;
+				margin-right: 10px;
+				line-height: 42px;
+				position: relative;
+				cursor: pointer;
+			}
+			.list h3{
+				position: relative;
+				z-index: 10;
+			}
+			.line{
+				width: 100%;
+				height: 0px;
+				position: absolute;
+				background: white;
+				left: 0px;
+				bottom: 0px;
+				transition: all 0.3s;
+				border-top: solid 3px red;
+			}
+			.list li:first-child .line{
+				height: 42px;
+			}
+			.box1,.box2,.box3{
+				padding: 10px;
+			}
+			.box2,.box3{
+				display: none;
+			}
+		</style>
+		<script src="jquery-3.4.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".list li").mouseenter(function(){
+					$(this).find(".line").css("height","100%");
+				})
+				$(".list li").on("mouseleave",fn);
+				function fn(){
+					$(this).find(".line").css("height","0");
+				}
+				$(".list li").eq(0).off("mouseleave");
+				$(".list li").click(function(){
+					$(".con>div").hide();
+					$(this).off("mouseleave");
+					$(this).siblings("li").on("mouseleave",fn);
+					$(this).find(".line").css("height","100%");
+					$(this).siblings("li").find(".line").css("height",0);
+					$(".con>div").eq($(this).index()).fadeIn();
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<ul class="list">
+				<li>
+					<h3>section1</h3>
+					<div class="line"></div>
+				</li>
+				<li><h3>section2</h3>
+					<div class="line"></div>
+				</li>
+				<li><h3>section3</h3>
+					<div class="line"></div>
+				</li>
+			</ul>
+			<div class="con">
+				<div class="box1">
+					<h3>Section 1</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+				</div>
+				<div class="box2">
+					<h3>Section 2</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+				</div>
+				<div class="box3">
+					<h3>Section 3</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
