@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			function   addNum(n){
+				 n += 5 ;//形参值发生改变，不会传回去给实参
+			}
+			var  a=10;
+			addNum(a);           
+           // alert(a);
+           
+           
+           //局部变量就是定义在函数内部的变量，这个变量只能在函数内部使用，即作用域范围只是函数内部，另外，形参也是局部变量。
+           
+           //全局变量就是定义在函数外部的变量，这个变量在任何函数中都有效，即作用域范围是当前文件的任何地方。
+           
+           //定义变量时省略var是不安全的，不过是合法的，不写var的时候会被解释是全局变量
+
+            var a = 10;//全局变量
+		    function m1(){
+				a = 5;
+				var c = 30;//局部变量
+				d = 20;
+		        //alert(a);//先执行，5
+		    }
+		    m1();
+		    //alert(a); //后执行，10
+		    //console.log(c);//c is not defined
+		    console.log(a);
+		    
+		    
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

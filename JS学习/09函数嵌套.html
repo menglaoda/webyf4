@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+//			函数内部可以再包含其他函数 
+//			函数之间允许相互调用，也允许向外调用, 
+//			不可以调用同级函数的嵌套函数
+
+			function fn1(){
+				console.log(1);
+				function fn2(){
+					console.log(2);
+				}
+				fn2();
+			};
+			//fn2();
+			function fn3(){
+				console.log(3);
+				fn1();
+				//fn2();//fn2 is not defined
+			};
+			fn3();
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var a1 = document.querySelector("a");
+				a1.onclick = function(){
+					if(10>5){
+						a1.setAttribute("href","https://www.baidu.com");
+					}else{
+						return false;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<a href="#">百度</a>
+	</body>
+</html>

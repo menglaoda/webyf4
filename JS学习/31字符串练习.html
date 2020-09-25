@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//1.将下面的字符串str的敏感字符*及空格去掉 (要正确表示*得转义成:\*) 
+//			var str = "H e  l  ** l    o    Wo r         L d  !";
+//			var str1 = str.replace(/ /g,"");
+//			console.log(str1.replace(/\*/g,""));
+			
+			//2.将字符串str = “When I was young, I love a girl in neighbor class.”中,从young提取到girl。但是不许数[young,girl]
+			var str = "When I was young, I love a girl in neighbor class.";
+			var n1 = str.indexOf("young");
+			var n2 = str.indexOf("girl");
+			console.log(str.substring(n1,n2+4));
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

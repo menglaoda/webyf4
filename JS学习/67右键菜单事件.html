@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 60px;
+				text-align: center;
+				position: fixed;
+				top: 100px;
+				left: 100px;
+				display: none;
+			}
+			.box a{
+				color: black;
+				display: block;
+				text-decoration: none;
+				border: solid 1px black;
+				margin-top: -1px;
+				height: 30px;
+				line-height: 30px;
+			}
+			.box a:hover{
+				background: #999;
+				color: white;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.querySelector(".box");
+				document.oncontextmenu = function(e){
+					
+					var e = e||event;
+					console.log(e.button);
+					box.style.top = e.clientY+"px";
+					box.style.left = e.clientX+"px";
+					box.style.display = "block";
+					return false;
+				}
+				box.onclick = function(e){
+					var e = e||event;
+					//1, 取消冒泡
+     				e.cancelBubble = true;
+					
+					//2, 停止传播
+     				e.stopPropagation();
+				}
+				document.onclick = function(){
+					box.style.display = "none";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<a href="#">复制</a>
+			<a href="#">粘贴</a>
+			<a href="#">剪切</a>
+		</div>
+	</body>
+</html>

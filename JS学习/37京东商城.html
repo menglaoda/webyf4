@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				height: 5000px;
+			}
+			#hd{
+				height: 60px;
+				position: fixed;
+				top: -60px;
+				left: 0px;
+				width: 100%;
+				background: red;
+				transition: all 1s;
+				z-index: 99;
+			}
+			.box1{
+				height: 1500px;
+				background: blue;
+			}
+			.box2{
+				height: 800px;
+				background: wheat;
+				position: relative;
+			}
+			#box-r{
+				width: 80px;
+				height: 400px;
+				position: absolute;
+				top: 0px;
+				right: 20px;
+				background: black;
+				transition: all 1s;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var hd = document.getElementById("hd");
+				var boxr = document.getElementById("box-r");
+				window.onscroll = function(){
+					var top = document.documentElement.scrollTop||document.body.scrollTop;
+					if(top>=1500){
+						hd.style.transition = "all 1s";
+						hd.style.top = 0+"px";
+						boxr.style.transition = "all 1s";
+						boxr.style.top = 80+"px";
+						boxr.style.position="fixed";
+						
+					}else{
+						hd.style.transition = "none";
+						hd.style.top = -60+"px";
+						boxr.style.transition = "none";
+						boxr.style.top = 0+"px";
+						boxr.style.position="absolute";
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="hd"></div>
+		<div class="box1"></div>
+		<div class="box2">
+			<div id="box-r"></div>
+		</div>
+	</body>
+</html>

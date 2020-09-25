@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 1226px;
+				height: 460px;
+				border: solid 5px black;
+				margin: 50px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			.imgbox {
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				font-size: 0;
+				transition: all 1s;
+			}
+			.imgbox>div{
+				width: 1226px;
+				height: 460px;		
+				font-size: 60px;
+				font-weight: 900;
+				text-align: center;
+				line-height: 460px;	
+				float: left;
+			}
+			.imgbox div:first-child,.imgbox div:last-child{
+				background: red;
+			}
+			.left-btn,.right-btn{
+				width: 41px;
+				height: 69px;
+				background: url(img/icon-slides.png) -83px 0px;
+				position: absolute;
+				top: 50%;
+				margin-top: -35px;
+				cursor: pointer;
+			}
+			.left-btn{
+				left: 0;
+			}
+			.right-btn{
+				right: 0;
+				background: url(img/icon-slides.png) -125px 0px;
+			}
+			.left-btn:hover{
+				background: url(img/icon-slides.png) -0px 0px;
+			}
+			.right-btn:hover{
+				background: url(img/icon-slides.png) -42px 0px;
+			}
+			.list{
+				width: 125px;
+				height: 25px;
+				position: absolute;
+				bottom: 20px;
+				left: 50%;
+				margin-left: -72.5px;
+				background: rgba(255,255,255,0.5);
+				list-style: none;
+				border-radius: 25px;
+				padding: 0px 10px;
+			}
+			.list li{
+				float: left;
+				width: 15px;
+				height: 15px;
+				border-radius: 100%;
+				background: white;
+				margin:0px 5px;
+				margin-top: 5px;
+			}
+			.list li:first-child{
+				background:orangered;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var obox = document.querySelector(".obox");
+				var imgbox = document.querySelector(".imgbox");
+				var oimg = imgbox.querySelectorAll("div");
+				var list = document.querySelector(".list");
+				var oli = list.querySelectorAll("li");
+				var leftbtn = document.querySelector(".left-btn");
+				var rightbtn = document.querySelector(".right-btn");
+				imgbox.style.width = oimg[0].offsetWidth*oimg.length+"px";
+				for(var j=1;j<oimg.length-1;j++){
+					oimg[j].style.background = "rgb("+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+","+Math.round(Math.random()*255)+")";
+				}
+				
+				var i =0;
+				//自动轮播
+				var timer= setInterval(banner,3000);
+				function banner(){
+					i++;
+					if(i==oimg.length){
+						i=1;
+						imgbox.style.left = 0+"px";
+						imgbox.style.transition = "none";
+						setTimeout(function(){
+							imgbox.style.transition = "all 1s";
+							imgbox.style.left = -i*oimg[0].offsetWidth+"px";
+						},5)
+					}else{
+						imgbox.style.left = -i*oimg[0].offsetWidth+"px";
+					}
+					icon();
+				}
+				function icon(){
+					for(var j=0;j<oli.length;j++){
+						oli[j].style.background = "white";
+					}
+					if(i==oli.length){
+						oli[0].style.background = "orangered";
+					}else{
+						oli[i].style.background = "orangered";
+					}
+					
+				}
+				//下一张
+				rightbtn.onclick = function(){
+					if(imgbox.offsetLeft%oimg[0].offsetWidth == 0){
+						banner();
+					}
+				}
+				
+				//上一张
+				leftbtn.onclick = function(){
+					if(imgbox.offsetLeft%oimg[0].offsetWidth == 0){
+						i--;
+						if(i<0){
+							i=oimg.length-2;
+							imgbox.style.left = -oimg[0].offsetWidth*(oimg.length-1)+"px";
+							imgbox.style.transition = "none";
+							setTimeout(function(){
+								imgbox.style.transition = "all 1s";
+								imgbox.style.left = -i*oimg[0].offsetWidth+"px";
+							},5)
+						}else{
+							imgbox.style.left = -i*oimg[0].offsetWidth+"px";
+						}
+						icon();
+					}
+				}
+				//小圆点
+				for(var k=0;k<oli.length;k++){
+					oli[k].index = k;
+					oli[k].onclick = function(){
+						i = this.index;
+						icon();
+						imgbox.style.left = -i*oimg[0].offsetWidth+"px";
+					}
+				}
+				
+				
+				//鼠标移入暂停
+				obox.onmouseenter = function(){
+					clearInterval(timer);
+					console.log(1)
+				}
+				obox.onmouseleave = function(){
+					timer= setInterval(banner,3000);
+				}
+				window.onfocus = function(){
+					clearInterval(timer);
+					timer= setInterval(banner,3000);
+					console.log(2)
+				}
+				window.onblur = function(){
+					clearInterval(timer);
+					
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="imgbox">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>1</div>
+			</div>
+			<div class="left-btn"></div>
+			<div class="right-btn"></div>
+			<ul class="list">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</body>
+</html>

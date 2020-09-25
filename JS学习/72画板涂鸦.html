@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				-moz-user-select: none;
+				-o-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			.list{
+				position: fixed;
+				top: 100px;
+				left: 100px;
+				list-style: none;
+				width: 80px;
+				text-align: center;
+				display: none;
+				z-index: 99;
+				background: white;
+			}
+			.list li{
+				border: solid 1px #999;
+				height: 26px;
+				line-height: 26px;
+				margin-top: -1px;
+				cursor: pointer;
+			}
+			.list li:hover{
+				background: #666;
+				color: white;
+			}
+			.active{
+				width: 10px;
+				height: 10px;
+				border-radius: 100%;
+				background: black;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var list = document.querySelector(".list");
+				var oli = list.querySelectorAll("li");
+				var obox = document.querySelector(".obox");
+				document.oncontextmenu = function(e){
+					var e=e||event;
+					list.style.top = e.clientY+"px";
+					list.style.left = e.clientX+"px";
+					list.style.display = "block";
+					return false;
+				}
+				var obj = {
+					width:10,
+					height:10,
+					bg:"black"
+				}
+				document.onmousedown = function(e){
+					var e=e||event;
+					list.style.display = "none";
+					if(e.button==0){
+						document.onmousemove = function(e){
+							var e=e||event;
+							var div1 = document.createElement("div");
+							div1.className = "active";
+							div1.style.top = e.clientY+"px";
+							div1.style.left = e.clientX+"px";
+							div1.style.width = obj.width+"px";
+							div1.style.height = obj.height+"px";
+							div1.style.background = obj.bg;
+							obox.appendChild(div1);
+						}
+					}
+					
+					document.onmouseup = function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+				for(var i=0;i<oli.length;i++){
+					oli[i].onmousedown = function(e){
+						var e=e||event;
+						console.log(this.innerHTML);
+						if(this.innerHTML=="清空画板"){
+							obox.innerHTML = "";
+						}
+						if(this.innerHTML=="橡皮擦"){
+							obj.bg = "white";
+						}
+						if(this.innerHTML =="小号笔"){
+							obj.width = 10;
+							obj.height=10;
+						}
+						if(this.innerHTML =="中号笔"){
+							obj.width = 15;
+							obj.height=15;
+						}
+						if(this.innerHTML =="大号笔"){
+							obj.width = 20;
+							obj.height=20;
+						}
+						if(this.innerHTML =="黑色笔"){
+							obj.bg="black";
+						}
+						if(this.innerHTML =="金色笔"){
+							obj.bg="gold";
+						}
+						if(this.innerHTML =="绿色笔"){
+							obj.bg="green";
+						}
+						if(this.innerHTML =="红色笔"){
+							obj.bg="red";
+						}
+						//1, 取消冒泡
+	     				e.cancelBubble = true;
+						
+						//2, 停止传播
+	     				e.stopPropagation();
+	     				list.style.display = "none";
+					}
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<ul class="list">
+			<li>清空画板</li>
+			<li>橡皮擦</li>
+			<li>小号笔</li>
+			<li>中号笔</li>
+			<li>大号笔</li>
+			<li>黑色笔</li>
+			<li>金色笔</li>
+			<li>红色笔</li>
+			<li>绿色笔</li>
+		</ul>
+		<div class="obox"></div>
+	</body>
+</html>

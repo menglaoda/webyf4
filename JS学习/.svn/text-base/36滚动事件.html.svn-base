@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				height: 5000px;
+			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: fixed;
+				bottom: 10px;
+				right: 10px;
+				text-align: center;
+				line-height: 100px;
+				cursor: pointer;
+				display: none;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("box");
+				//绑定滚动事件
+				var top = 0;
+				window.onscroll = function(){
+					//console.log("滚动条位置发生变化");
+					//获取距离顶部的距离
+					top = document.documentElement.scrollTop || document.body.scrollTop;
+					console.log(top);
+					if(top>=2000){
+						box.style.display = "block";
+					}else{
+						box.style.display = "none";
+					}
+				}
+				box.onclick = function(){
+					//document.documentElement.scrollTop = document.body.scrollTop=0;
+					var timer = setInterval(function(){
+						top=Math.floor(top*0.7);
+						document.documentElement.scrollTop = document.body.scrollTop=top;
+						if(top==0){
+							clearInterval(timer);
+						}
+					},50)
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">返回顶部</div>
+	</body>
+</html>

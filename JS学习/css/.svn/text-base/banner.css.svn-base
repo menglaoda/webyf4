@@ -1,0 +1,68 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.banner{
+	width: 990px;
+	height: 460px;
+	position: relative;
+	margin: 50px auto;
+	border: solid 2px black;
+	cursor: pointer;
+}
+.banner img{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: all 1s;
+}
+.banner img:first-child{
+	opacity: 1;
+}
+.left-btn,.right-btn{
+	width: 41px;
+	height: 69px;
+	background: url(img/icon-slides.png) -83px 0px;
+	position: absolute;
+	top: 50%;
+	margin-top: -35px;
+	cursor: pointer;
+}
+.left-btn{
+	left: 0;
+}
+.right-btn{
+	right: 0;
+	background: url(img/icon-slides.png) -125px 0px;
+}
+.left-btn:hover{
+	background: url(img/icon-slides.png) -0px 0px;
+}
+.right-btn:hover{
+	background: url(img/icon-slides.png) -42px 0px;
+}
+.bannner-list{
+	position: absolute;
+	bottom: 25px;
+	right: 30px;
+	list-style: none;
+}
+.bannner-list li{
+	float: left;
+	width: 8px;
+	height: 8px;
+	margin: 0px 4px;
+	border-radius: 100%;
+	border: solid 2px #ccc;
+	background: #999;
+	cursor: pointer;
+}
+.bannner-list li:first-child{
+	background: white;
+}
+.bannner-list li:hover{
+	background: white;
+}

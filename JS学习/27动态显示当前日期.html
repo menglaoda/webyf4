@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/fn.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oh = document.getElementById("oh");
+				var arr = ["星期天","星期一","星期二","星期三","星期四","星期五","星期六"];
+				setInterval(function(){
+					var d = new Date();
+					var y = d.getFullYear();
+					var month = d.getMonth();//0-11
+					var d1 = d.getDate();
+					var h = d.getHours();
+					var m = d.getMinutes();
+					var s = d.getSeconds();
+					var w = d.getDay();//0-6
+					oh.innerHTML = y+"年"+fn(month+1)+"月"+fn(d1)+"日 "+fn(h)+":"+fn(m)+":"+s+" "+arr[w];
+				},1000)
+			}
+		</script>
+	</head>
+	<body>
+		<h3 id="oh">00年00月00日 00:00:00 星期五</h3>
+	</body>
+</html>

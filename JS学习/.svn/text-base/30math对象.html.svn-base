@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+//			Math.round(3.6)     //四舍五入
+//			Math.random()          //返回(0-1)之间的随机数
+//			Math.max(num1, num2)  //返回较大的数
+//			Math.min(num1, num2)   //返回较小的数
+//			Math.abs(num)     //绝对值
+//			Math.ceil(19.3)//20     //向上取整
+//			Math.floor(11.8)//11    //向下取整
+
+			console.log(Math.random());
+			//获取[0-10]中的随机整数
+			console.log(Math.round(Math.random()*10));
+			
+			//获取[A-Z]
+			console.log(Math.round(Math.random()*25)+65);
+			console.log(String.fromCharCode(Math.round(Math.random()*25)+65))
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

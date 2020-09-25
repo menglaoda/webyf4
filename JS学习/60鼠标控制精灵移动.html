@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				cursor: none;
+			}
+			.img1{
+				width: 30px;
+				position: fixed;
+				top: 0px;
+				left: -50px;
+				/*transition: all 0.1s;*/
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var img1 = document.querySelector(".img1");
+				document.onmousemove = function(e){
+					var e = e || event;
+					img1.style.top = e.clientY-img1.offsetHeight/2+"px";
+					img1.style.left = e.clientX-img1.offsetWidth/2+"px";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<img class="img1" src="img/a1.png" />
+	</body>
+</html>

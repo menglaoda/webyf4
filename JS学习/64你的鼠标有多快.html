@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			.obox{
+				width: 800px;
+				margin: 0 auto;
+				text-align: center;
+				position: relative;
+			}
+			.obox h3{
+				padding: 40px 0px;
+			}
+			.btn{
+				margin: 40px 0px;
+			}
+			.box1{
+				border: solid 1px #333;
+				height: 450px;
+				position: relative;
+				top: 0px;
+				/*animation: mybox1 0.3s 3;*/
+			}
+			@keyframes mybox1{
+				0%{top: 0px;}
+				25%{top: 10px;}
+				50%{top: 0px;}
+				75%{top: -10px;}
+				100%{top: -0px;}
+			}
+			.box2{
+				width: 140px;
+				background: orangered;
+				position: absolute;
+				top: 0px;
+				left: -140px;
+				padding: 20px 0px;
+			}
+			b{
+				margin: 0px 5px;
+				font-size: 24px;
+			}
+			.active{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				width: 24px;
+				cursor: pointer;
+			}
+			.over{
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				width: 100%;
+				height: 100vh;
+				background: rgba(0,0,0,0.7);
+				display: none;
+			}
+			.over-info{
+				width: 300px;
+				height: 100px;
+				padding: 50px 0px;
+				background: white;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-top: -100px;
+				margin-left: -150px;
+				text-align: center;
+				border-radius: 10px;
+			}
+			.over-info p{
+				font-size: 30px;
+				margin-bottom: 20px;
+			}
+			.over-info span{
+				display: inline-block;
+				height: 30px;
+				background: olivedrab;
+				line-height: 30px;
+				padding: 0px 10px;
+				color: white;
+				border-radius: 4px;
+				margin: 0px 10px;
+				cursor: pointer;
+			}
+			@media  screen and (max-width: 480px) {
+				.obox{
+					width: 94%;
+				}
+				.btn {
+				    margin: 20px 0px 50px;
+				}
+				.box2 {
+					width: 100%;
+				    top: -35px;
+				    left: -1px;
+				    padding: 0px 0px;
+				    border: solid 1px orangered;
+				}
+				.box2 p:first-child{
+					float: left;
+				}
+				.box2 p:last-child{
+					float: right;
+				}
+				.obox h3 {
+				    padding: 20px 0px 10px;
+				}
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.querySelector(".btn");
+				var box1 = document.querySelector(".box1");
+				var grade1 = document.querySelector(".f1");
+				var grade2 = document.querySelector(".f2");
+				var over = document.querySelector(".over");
+				var qd = document.querySelector(".qd");
+				var fh = document.querySelector(".fh");
+				var box3 = document.querySelector(".box3");
+				var f1 = 0;//得分
+				var f2 = 0;//丢分
+				var speed = 2;//速度
+				var timer2;
+				btn.onclick = function(){
+					this.innerHTML="游戏正在进行中";
+					this.style.opacity = 0.3;
+					this.setAttribute("disabled",true);
+					f1 = 0;//得分
+					f2 = 0;//丢分
+					grade1.innerHTML = 0;
+					grade2.innerHTML = 0;
+					speed = 2;//速度
+					box1.style.animation="none";
+					icon();
+				}
+				//创建qq表情
+				function icon(){
+					//创建img标签
+					var img1 = document.createElement("img");
+					//添加路径及样式
+					var n1 = Math.ceil(Math.random()*50);
+					img1.src = "QQexp/"+n1+".gif";
+					img1.className = "active";
+					img1.setAttribute("draggable",false);
+					box3.appendChild(img1);
+					img1.style.left =Math.round(Math.random()*(box1.clientWidth-img1.offsetWidth))+"px";
+					//下落
+					speed = Math.floor(f1/10)*2+2;//2,4,6,8,10
+					var timer = setInterval(function(){
+						var img1y = img1.offsetTop;
+						//碰到下边框；
+						if(img1y>=box1.clientHeight-img1.offsetHeight){
+							clearInterval(timer);
+							img1.onmousedown = null;
+							img1.style.top = box1.clientHeight-img1.offsetHeight+"px";
+							img1.src = "QQexp/51.gif";
+							box1.style.animation = "mybox1 0.1s 3";
+							grade2.innerHTML = parseInt(grade2.innerHTML)+1;
+							timer2 =  setTimeout(function(){
+								//游戏结束
+								if(grade2.innerHTML==5){
+									clearTimeout(timer2);
+									clearInterval(timer);
+									over.style.display = "block";
+								}else{
+									box3.removeChild(img1);
+									box1.style.animation="none";
+									icon();
+								}
+							},400)
+						}else{
+							img1.style.top = img1y+speed+"px";	
+						}
+					},30)
+
+					img1.onmousedown = function(){
+						img1.src = "QQexp/52.gif";
+						clearInterval(timer);
+						clearTimeout(timer2);
+						img1.onmousedown = null;
+						var x1 = img1.offsetLeft;
+						var speed2 = 4;
+						var x2 = 0;
+						f1++;
+						grade1.innerHTML = parseInt(grade1.innerHTML)+1;
+						var t3 =  setInterval(function(){
+							x2++;
+							if(x2<20){
+								img1.style.left = x1+speed2+"px";
+							}else{
+								speed2 *=-1;
+								x2=0;
+							}
+						},1)
+						setTimeout(function() {
+							clearInterval(t3);
+							box3.removeChild(img1);
+							icon();
+						},300)
+					}
+				}
+				
+				
+				//点击确定
+				qd.onclick = function(){
+					over.style.display = "none";
+					btn.innerHTML="开始游戏";
+					btn.style.opacity = 1;
+					btn.removeAttribute("disabled");
+					box3.innerHTML = "";
+				}
+				
+				//满血复活
+				fh.onclick = function(){
+					var s = 100;
+					if(s=100){
+						over.style.display = "none";
+						box3.innerHTML = "";
+						f2 = 0;
+						grade2.innerHTML = 0;
+						box1.style.animation = "none";
+						icon();
+						
+					}
+				}
+				
+				//禁止火狐拖拽图片
+				document.ondragstart = function (e) {
+				     return false;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<h3>你的鼠标有多快？</h3>
+			<p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万不让让它掉下去！！</p>
+			<button class="btn">开始游戏</button>
+			<div class="box1">
+				<div class="box2">
+					<p>得分：<b class="f1">0</b>分</p>
+					<p>丢分：<b class="f2">0</b>分</p>
+				</div>
+				<div class="box3"></div>
+			</div>
+		</div>
+		<div class="over">
+			<div class="over-info">
+				<p>游戏结束!!!</p>
+				<span class="qd">确定</span>
+				<span class="fh">满血复活</span>
+			</div>
+		</div>
+	</body>
+</html>

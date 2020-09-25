@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.querySelector(".btn");
+				//事件冒泡：从里往外触发
+				document.onclick = function(e){
+					
+					console.log("文档被点击了");
+					
+
+				}
+				btn.onclick = function(){
+					console.log("按钮被点击了");
+					var e = e||event;
+					//1, 取消冒泡
+     				e.cancelBubble = true;
+					
+					//2, 停止传播
+     				e.stopPropagation();
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button class="btn">按钮</button>
+	</body>
+</html>

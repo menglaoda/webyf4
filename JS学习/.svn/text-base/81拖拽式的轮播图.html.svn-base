@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: #f5f5f5;
+			}
+			.obox{
+				width: 1190px;
+				height: 260px;
+				margin: 100px auto;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			.box-r{
+				float: right;
+				width: 990px;
+				height: 260px;
+				background: gold;
+				position: relative;
+				overflow: hidden;
+			}
+			.icon{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+			}
+			.icon a{
+				width: 198px;
+				height: 260px;
+				background: white;
+				float: left;
+				position: relative;
+				overflow: hidden;
+				color: #333;
+				text-decoration: none;
+			}
+			.icon img{
+				width: 150px;
+				display: block;
+				margin: 30px auto 10px;
+			}
+			.icon p{
+				width: 150px;
+				margin: 0 auto;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				text-indent: 20px;
+			}
+			.icon a:nth-child(2n-1) img{
+				position: absolute;
+				bottom: 35px;
+				left: 50%;
+				margin: 0;
+				margin-left: -75px;	
+			}
+			.icon a:nth-child(2n-1) p{
+				position: absolute;
+				top :50px;
+				left: 50%;
+				margin-left: -75px;
+			}
+			.line{
+				width: 960px;
+				position: absolute;
+				bottom: 15px;
+				left: 15px;
+				opacity: 0;
+				border-top: solid 2px #ccc;
+			}
+			.range{
+				width: 60px;
+				height: 10px;
+				border-radius:10px ;
+				background: #ccc;
+				position: absolute;
+				top: -6px;
+				left: 0px;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var icon = document.querySelector(".icon");
+				var boxr = document.querySelector(".box-r");
+				var line = document.querySelector(".line");
+				var range = document.querySelector(".range");
+				var oa = icon.querySelectorAll("a");
+				for(var i=0;i<oa.length;i++){
+					oa[i].setAttribute("draggable",false);
+				}
+				icon.style.width = oa.length*oa[0].offsetWidth+"px";
+				//自动轮播
+				var speed = 1;
+				var timer = setInterval(lunbo,20);
+				
+				function lunbo(){
+					var x1 = icon.offsetLeft;
+					var n1 = Math.abs(x1/(icon.offsetWidth-boxr.offsetWidth));
+					if(Math.floor(n1)==1){
+						n1=0;
+						range.style.left=0+"px";
+						icon.style.left=0+"px";
+					}else{
+						range.style.left = (line.offsetWidth-range.offsetWidth)*n1+"px";
+						icon.style.left = x1-speed+"px";
+					}
+					
+					
+				}
+				
+				var a1 = 0;
+				boxr.onmouseleave = function(){
+					timer = setInterval(lunbo,20);
+					line.style.opacity = "0";
+					a1=0;
+				}
+				
+				boxr.onmousemove = function(){
+					clearInterval(timer);
+					line.style.opacity = "1";
+					a1 = 1;
+				}
+				range.onmousedown = function(e){
+					
+					var e = e||event;
+					var x1 = e.clientX-boxr.offsetLeft-line.offsetLeft-range.offsetLeft;
+					console.log(x1);
+					document.onmousemove = function(e){
+						clearInterval(timer);
+						line.style.opacity = "1";
+						var e = e||event;
+						var x2 = e.clientX-boxr.offsetLeft-line.offsetLeft-x1;
+						if(x2<=0){
+							x2=0;
+							range.style.left =0+"px";
+						}else if(x2>=line.offsetWidth-range.offsetWidth){
+							x2=line.offsetWidth-range.offsetWidth;
+							range.style.left =line.offsetWidth-range.offsetWidth+"px";
+						}else{
+							range.style.left =x2+"px";
+						}
+						var b1 = x2/(line.offsetWidth-range.offsetWidth);
+						icon.style.left=-(icon.offsetWidth-boxr.offsetWidth)*b1+"px"
+						
+					}
+					document.onmouseup = function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+						timer = setInterval(lunbo,20);
+						if(a1==0){
+							line.style.opacity = "0";
+						}
+					}
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<img src="https://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/img/c78710f134c8845d365aa5028230db9f.png" />
+			<div class="box-r">
+				<div class="icon">
+					<a href="#">
+						<img src="img/x1.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x2.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x3.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x4.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x5.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x6.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x7.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x8.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x9.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x10.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x1.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x2.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x3.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x4.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+					<a href="#">
+						<img src="img/x5.jpg" />
+						<p>好的规范化的设计风格的环境</p>
+					</a>
+				</div>
+				<div class="line">
+					<div class="range"></div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				list-style: none;
+				width: 500px;
+				margin: 100px auto;
+				font-size: 30px;
+			}
+			li{
+				margin-top: 20px;
+			}
+			img{
+				width: 30px;
+				vertical-align: top;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oimg = document.querySelectorAll("img");
+				var arr = ["非常差","差","一般","好","非常好"];
+				for(var i=0;i<oimg.length;i++){
+					oimg[i].index = i;
+					oimg[i].onclick = function(){
+						var n1 = this.index%5;
+						var img1 = this.parentNode.querySelectorAll("img");
+						for(var j=0;j<img1.length;j++){
+							img1[j].src = "img/x1.png";
+						}
+						for(var j=0;j<=n1;j++){
+							img1[j].src = "img/x2.png";
+						}
+						this.parentNode.querySelector("span").innerHTML = arr[n1];
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<b>服务态度</b>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<span>一般</span>
+			</li>
+			<li>
+				<b>产品质量</b>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<span>一般</span>
+			</li>
+			<li>
+				<b>物流速度</b>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<img src="img/x1.png"/>
+				<span>一般</span>
+			</li>
+		</ul>
+	</body>
+</html>

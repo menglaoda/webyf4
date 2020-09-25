@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width: 1226px;
+				height: 400px;
+				margin: 50px auto;
+				background: #f5f5f5;
+			}
+			.hd{
+				height: 50px;
+				line-height: 50px;
+			}
+			.hd h3{
+				float: left;
+				font-size: 20px;
+				font-weight: 500;
+			}
+			.hd-r{
+				float: right;
+			}
+			.hd-r span{
+				width: 34px;
+				height: 22px;
+				border: solid 1px #ccc;
+				color: #666;
+				text-align: center;
+				line-height: 22px;
+				float: left;
+				margin-left: -1px;
+				margin-top: 13px;
+				cursor: pointer;
+			}
+			.hd-r .left-btn{
+				opacity: 0.5;
+			}
+			.con-l{
+				float: left;
+				width: 234px;
+				height: 340px;
+				background: palegreen;
+			}
+			.con-l img{
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+			.con-r{
+				width: 978px;
+				height: 340px;
+				float: right;
+				position: relative;
+				overflow: hidden;
+			}
+			.banner{
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				list-style: none;
+				transition:  all 1s;
+			}
+			.banner li{
+				float: left;
+				width: 234px;
+				height: 340px;
+				background: white;
+				margin-left: 14px;
+				text-align: center;
+			}
+			.banner li:first-child{
+				margin-left: 0px;
+			}
+			.banner h3{
+				font-weight: 500;
+				font-size: 16px;
+				color: #666;
+			}
+			.banner p{
+				color: #999;
+			}
+			.s1{
+				color: red;
+			}
+			.s2{
+				color: #aaa;
+				text-decoration: line-through;
+			}
+			.banner img{
+				margin: 30px auto;
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var leftbtn = document.querySelector(".left-btn");
+				var rightbtn = document.querySelector(".right-btn");
+				var conr = document.querySelector(".con-r");
+				var banner = document.querySelector(".banner");
+				var oli = banner.querySelectorAll("li");
+				var gl = parseInt(getComputedStyle(oli[1],null)["margin-left"]);
+				banner.style.width = oli[0].offsetWidth*oli.length+(oli.length-1)*gl+"px";
+			
+				//右按钮
+				var n1 = Math.ceil(oli.length/4)-1;
+				console.log(n1);
+				var w = conr.offsetWidth;
+				var i =0;
+				
+				rightbtn.addEventListener("click",fn2);
+				function fn2(){
+					leftbtn.addEventListener("click",fn1);
+					i++;
+					if(i==5){
+						rightbtn.removeEventListener("click",fn2);
+						rightbtn.style.opacity = 0.5;
+						banner.style.left =-(banner.offsetWidth-w)+"px"; 
+					}else{
+						banner.style.left =-w*i-gl*i+"px"; 
+					}
+					
+				}
+				
+				//左按钮
+				leftbtn.addEventListener("click",fn1);
+				function fn1(){
+					rightbtn.addEventListener("click",fn2);
+					i--;
+					if(i<=0){
+						i=0;
+						leftbtn.removeEventListener("click",fn1)
+						leftbtn.style.opacity = 0.5;
+						banner.style.left =-0+"px"; 
+					}else{
+						banner.style.left =-w*i-gl*i+"px";
+					}
+				}
+				
+			})
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="hd">
+				<h3>小米闪购</h3>
+				<div class="hd-r">
+					<span class="left-btn"><</span>
+					<span class="right-btn">></span>
+				</div>
+			</div>
+			<div class="con">
+				<div class="con-l">
+					<img src="img/xm.jpg" />
+				</div>
+				<div class="con-r">
+					<ul class="banner">
+						<li>
+							<img src="img/x1.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x2.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x3.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x4.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x5.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x6.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x7.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x8.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x9.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x10.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x1.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x2.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x3.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x4.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x5.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x6.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x7.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x8.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x9.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x10.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x8.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x9.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+						<li>
+							<img src="img/x10.jpg" />
+							<h3>米家电水壶1A 白色</h3>
+							<p>煮水不久候，暖心不烫手</p>
+							<span class="s1">69元</span>
+							<span class="s2">79元</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(e){
+				var e = e||event;
+				var btn = document.querySelector(".btn");
+				btn.onclick = function(e){
+					var e = e||event;
+					//target: 目标对象,存放绑定事件的元素节点对象
+					console.log(e.target);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button class="btn">按钮</button>
+	</body>
+</html>

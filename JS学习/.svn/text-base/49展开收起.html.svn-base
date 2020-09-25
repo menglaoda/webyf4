@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			li{
+				background: orange;
+				margin-top: 20px;
+				padding: 20px;
+			}
+			button{
+				float: right;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var btn = document.querySelectorAll("button");
+				var op = document.querySelectorAll("p");
+				for(var j=0;j<op.length;j++){
+					op[j].setAttribute("name",op[j].innerHTML);
+					op[j].innerHTML = op[j].getAttribute("name").substring(0,20)+"...";
+				}
+				for(var i=0;i<btn.length;i++){
+					btn[i].onclick = function(){
+						if(this.innerHTML=="收起"){
+							this.innerHTML="展开";
+							this.parentNode.querySelector("p").innerHTML = this.parentNode.querySelector("p").getAttribute("name").substring(0,20)+"...";
+						}else{
+							this.innerHTML="收起";
+							this.parentNode.querySelector("p").innerHTML = this.parentNode.querySelector("p").getAttribute("name");
+						}
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				<h3>快点交罚款的设计费</h3>
+				<p>吉萨看好的看见俺说的看见俺收到卡就是电话卡时间的话就卡死的贺卡手机号打卡就是速度就爱看好多卡手机电话卡时间</p>
+				<span>2020-08-02</span>
+				<button>展开</button>
+			</li>
+			<li>
+				<h3>快点交罚款的设计费</h3>
+				<p>吉萨看好的看见俺说的看见俺收到卡就是电话卡时间的话就卡死的贺卡手机号打卡就是速度就爱看好多卡手机电话卡时间</p>
+				<span>2020-08-02</span>
+				<button>展开</button>
+			</li>
+			<li>
+				<h3>快点交罚款的设计费</h3>
+				<p>吉萨看好的看见俺说的看见俺收到卡就是电话卡时间的话就卡死的贺卡手机号打卡就是速度就爱看好多卡手机电话卡时间</p>
+				<span>2020-08-02</span>
+				<button>展开</button>
+			</li>
+			<li>
+				<h3>快点交罚款的设计费</h3>
+				<p>吉萨看好的看见俺说的看见俺收到卡就是电话卡时间的话就卡死的贺卡手机号打卡就是速度就爱看好多卡手机电话卡时间</p>
+				<span>2020-08-02</span>
+				<button>展开</button>
+			</li>
+		</ul>
+	</body>
+</html>

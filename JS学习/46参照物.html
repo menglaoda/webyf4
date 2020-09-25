@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 100px;
+				height: 120px;
+				background: red;
+				margin: 50px auto 100px;
+				padding: 10px;
+				border: 1px solid black;
+				position: relative;
+			}
+			.box1{
+				width: 50px;
+				height: 50px;
+				background: blue;
+				margin-top: 20px;
+				margin-left: 30px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.querySelector(".box");
+				var box1 = document.querySelector(".box1");
+				//offsetWidth(width+padding+border) 宽度
+				console.log(box.offsetWidth);
+				
+				//offsetHeight 高度
+				console.log(box.offsetHeight);
+				console.log(box.clientHeight);//不包括边框
+				
+				//box.offsetTop 上偏移
+				console.log(box.offsetTop);
+				console.log(box1.offsetTop);
+				
+				//offsetLeft 左偏移
+				console.log(box.offsetLeft);
+				console.log(box1.offsetLeft);
+				
+				//可视区宽高
+				console.log(window.innerWidth);
+				console.log(window.innerHeight);
+				
+				//文档宽高
+				console.log(document.body.clientWidth);
+				console.log(document.body.clientHeight);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<div class="box1"></div>
+		</div>
+		
+	</body>
+</html>

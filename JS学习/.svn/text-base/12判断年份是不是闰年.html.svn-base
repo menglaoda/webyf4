@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//2.写一个函数判断一个年份是不是闰年
+			function fn(n){
+				if((n%4==0 && n%100!=0) || n%400==0){
+					console.log(n+"是闰年");
+				}else{
+					console.log(n+"是平年");
+				}
+			}
+			fn(2020)
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

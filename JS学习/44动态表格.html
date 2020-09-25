@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.active{
+				color: blue;
+				font-weight: 900;
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var inp = document.querySelectorAll("input");
+				var btn = document.querySelector("button");
+				var tab = document.querySelector("table");
+				
+				btn.onclick = function(){
+					var tr1 = document.createElement("tr");
+					var td1 = document.createElement("td");
+					var td2 = document.createElement("td");
+					var td3 = document.createElement("td");
+					var td4 = document.createElement("td");
+					td1.innerHTML = inp[0].value;
+					td2.innerHTML = inp[1].value;
+					td3.innerHTML = inp[2].value;
+					var span1 = document.createElement("span");
+					span1.innerHTML = "删除";
+					td4.appendChild(span1);
+					td4.className = "active";
+					tr1.setAttribute("align","center");
+					
+					tr1.appendChild(td1);
+					tr1.appendChild(td2);
+					tr1.appendChild(td3);
+					tr1.appendChild(td4);
+					tab.appendChild(tr1);
+					
+					span1.onclick = function(){
+						tab.removeChild(tr1);
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" placeholder="ID" />
+		<input type="text" placeholder="名字" />
+		<input type="text" placeholder="手机" />
+		<button>保存</button>
+		<table width="600" border="1">
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Tel</th>
+				<th>操作</th>
+			</tr>
+		</table>
+	</body>
+</html>

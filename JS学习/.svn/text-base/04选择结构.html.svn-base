@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//单分支----if条件判断语句
+			var a1 = 1;
+			if(a1>5){
+				console.log("正确");
+			}
+			
+			//双分支语句格式
+			var a2= 1;
+			if(a2>5){
+				console.log("正确");
+			}else{
+				console.log("错误");
+			}
+			
+			//多分支语句格式
+			/*
+			if(){
+				if(){
+					
+				}else{
+					if(){
+						
+					}
+				}
+			}else if(){
+				
+			}else if(){
+				
+			}else if(){
+				
+			}else{
+				
+			}
+			
+			*/
+//			多分支——switch语句
+			//例题：按照考试成绩的等级，输出百分制数段.
+			var grade = "A";
+			switch(grade){
+				case "A":
+				console.log("成绩优秀");
+				break;
+				case "B":
+				console.log("成绩良好");
+				break;
+				case "C":
+				console.log("成绩及格");
+				break;
+				case "D":
+				console.log("成绩不及格");
+				break;
+				default:
+				console.log("输入有误");
+				break;
+			}
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

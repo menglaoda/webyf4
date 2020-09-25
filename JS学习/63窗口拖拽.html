@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.obox{
+				width:400px;
+				height: 250px;
+				background: red;
+				position: fixed;
+				top: 100px;
+				left: 200px;
+			}
+			.hd{
+				height: 40px;
+				line-height: 40px;
+				color: white;
+				text-indent: 10px;
+				background: blueviolet;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var hd = document.querySelector(".hd");
+				var obox = document.querySelector(".obox");
+				var span1 = document.querySelector("span");
+				hd.onmousedown = function(e){
+					var e = e||event;
+					//获取鼠标距离容器的位置
+					var divx = e.clientX-obox.offsetLeft;
+					var divy = e.clientY-obox.offsetTop;
+					document.onmousemove = function(e){
+						var e = e||event;
+						obox.style.top = e.clientY-divy+"px";
+						obox.style.left = e.clientX-divx+"px";
+					}
+					document.onmouseup = function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+				span1.onclick = function(){
+					obox.parentNode.removeChild(obox);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="obox">
+			<div class="hd">
+				<span>关闭</span>
+			</div>
+		</div>
+	</body>
+</html>

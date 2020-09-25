@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//方法1，创建定时器
+			setInterval(function(){
+				console.log(1);
+			},1000)
+			
+			//方法2，创建定时器
+			setInterval(fn,1000);
+			function fn(){
+				console.log(2);
+			}
+			
+			//方法3，创建定时器
+			var timer = setInterval("console.log(3)",1000);
+			
+			//关闭定时器
+			clearInterval(timer);
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

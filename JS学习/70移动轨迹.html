@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.active{
+				width: 10px;
+				height: 10px;
+				background: black;
+				border-radius: 100%;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var timer ;
+				var arr = [];
+				document.addEventListener("mousedown",function(){
+					clearInterval(timer);
+					arr.length=0;
+					document.addEventListener("mousemove",move);
+					function move(e){
+						var e = e||event;
+						var x1 = e.clientX;
+						var y1 = e.clientY;
+						var obj = {
+							top:y1,
+							left:x1
+						};
+						arr.push(obj);
+					}
+					document.addEventListener("mouseup",up);
+					function up(){
+						document.removeEventListener("mousemove",move);
+						document.removeEventListener("mouseup",up);
+						console.log(arr);
+						var i = 0;
+						timer = setInterval(function(){
+							var box = document.createElement("div");
+							box.className = "active";
+							box.style.top = arr[i].top+"px";
+							box.style.left = arr[i].left+"px";
+							document.body.appendChild(box);
+							i++;
+							if(i==arr.length){
+								clearInterval(timer);
+							}
+						},30)
+					}
+				});
+				
+			})
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

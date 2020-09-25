@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//定义函数,function 关键字，fn 函数
+			function fn(){				
+				console.log(1);
+			}
+			
+			//调用函数
+			fn();
+			
+			//计算2+8+5的结果
+			function fn1(a,b,c){
+				//a,b叫做形参
+				console.log(a+b+c);
+				//return 返回值
+				return a+b+c;
+			}
+			fn1(12,8,5);//2，8叫做实参
+			console.log(fn1(12,8,5))
+			
+			//1, 写一个函数计算1到100的和, 并返回结果打印出来;(n为函数参数)
+			function fn2(n){
+				var s = 0;
+				for(var i=1;i<=n;i++){
+					s+=i;
+				}
+				return s;
+			}
+			console.log(fn2(1000));
+			
+			//2, 写一个函数计算5的阶乘,并返回结果打印出来
+			function fn3(n){
+				var s = 1;
+				for(var i=1;i<=n;i++){
+					s*=i;
+				}
+				return s;
+			}
+			console.log(fn3(5));
+			
+			//3, 写一个函数计算两个数的最小公倍数; 并返回结果打印出来
+			function fn4(a,b){
+				for(var i=1;i<=a*b;i++){
+					if(i%a==0&&i%b==0){
+						document.write(i+"<br />");
+						return i;
+						break;
+					}
+				}
+			}
+			console.log(fn4(2,12));
+			
+			//练习：向一个函数传入不定数量的数值求和。
+			function fn5(){
+				//arguments对象(内置数组)
+				console.log(arguments);
+				//length
+				console.log(arguments.length);
+				//通过下标去访问数组元素
+				console.log(arguments[3]);
+				//访问最后一个数组元素
+				console.log(arguments[arguments.length-1]);
+				var s = 0;
+				for(var i=0;i<arguments.length;i++){
+					s+=arguments[i];
+				}
+				return s;
+			}
+			console.log(fn5(12,3,45,23,67,232,566,878,98,3,23,12,43,65,7,8,9,65,4,7676,322,7676,3,5,767,6,7,77,3232,322,44,4,5454,6,7,89,787,565,4,23,34,5,66,545,534,3,5656,456,545,33,212,3,5,55,5,12,5,5,5,5));
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

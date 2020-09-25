@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				-moz-user-select: none;/*禁止选中文字*/
+				-ms-user-select: none;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			.box{
+				width: 300px;
+				margin: 50px auto;
+				border: solid 1px black;
+			}
+			ul{
+				list-style: none;
+			}
+			ul label{
+				display: inline-block;
+				width: 70px;
+				text-align: right;
+			}
+			li{
+				margin-top: 20px;
+				position: relative;
+			}
+			li input{
+				width: 144px;
+				padding-right: 30px;
+				height: 25px;
+				border: solid 1px #999;
+				text-indent: 10px;
+				outline: medium;
+			}
+			#yzm{
+				width: 100px;
+				padding: 0;
+			}
+			#num{
+				background: wheat;
+				width: 70px;
+				height: 27px;
+				line-height: 27px;
+				vertical-align: middle;
+				display: inline-block;
+				text-align: center;
+				letter-spacing: 2px;
+				cursor: pointer;
+			}
+			li:last-child{
+				text-align: center;
+				margin-bottom: 20px;
+				
+			}
+			#btn{
+				width: 180px;
+				height: 30px;
+			}
+			.img1{
+				position: absolute;
+				top: 4px;
+				left: 228px;
+				width: 20px;
+				cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var user = document.getElementById("user");
+				var psw1 = document.getElementById("psw1");
+				var psw2 = document.getElementById("psw2");
+				var yzm = document.getElementById("yzm");
+				var num = document.getElementById("num");
+				var btn = document.getElementById("btn");
+				var img1 = document.getElementById("img1");
+				var img2 = document.getElementById("img2");
+				btn.onclick = function(){
+					//用户名不可以用数字开头，不能为空，用户名长度不低于6，不高于20
+					var re1 = /^[^0-9][a-zA-Z0-9,.-_?/]{5,19}$/;
+					if(re1.test(user.value)){
+						console.log("用户名格式正确");
+					}else{
+						alert("用户名格式错误");
+						user.value="";
+						user.focus();//获得焦点
+						fn();
+						return false;
+					}
+					
+//					2、密码不能为空
+//					3、两次填写密码必需一致才能提交
+
+					if((psw1.value.length!=0 &&psw2.value.length!=0)&&psw1.value==psw2.value){
+						console.log("正确");
+					}else{
+						alert("密码错误");
+						psw1.focus();//获得焦点
+						fn();
+						return false;
+					}
+					
+					//4、随机生成验证码，如： 4YT8，点击验证码要有切换功能，能忽略大小写
+					if(yzm.value.toLowerCase()==num.innerHTML.toLowerCase()){
+						console.log("正确")
+					}else{
+						alert("验证码错误");
+						fn();
+						yzm.value="";
+						yzm.focus();//获得焦点
+						return false;
+					}
+				}
+				function fn(){
+					var arr = [];
+					for(var i=0;i<4;i++){
+						var a1 = Math.floor(Math.random()*3);
+						if(a1==0){
+							var n1 = Math.floor(Math.random()*10);
+						    arr.push(n1);
+						}else if(a1==1){
+							var n1 = Math.floor(Math.random()*26)+65;
+							var n2 = String.fromCharCode(n1);
+						    arr.push(n2);
+						}else if(a1==2){
+							var n1 = Math.floor(Math.random()*26)+97;
+						    var n2 = String.fromCharCode(n1);
+						    arr.push(n2);
+						}
+					}
+					console.log(arr);
+					num.innerHTML = arr.join("");
+				}
+				fn();
+				//点击验证码切换
+				num.onclick = function(){
+					fn();
+				}
+				
+				
+				//鼠标按下看见内容，松开看不见
+				img1.onmousedown = function(){
+					img1.src = "img/view.png";
+					psw1.type = "text";
+				}
+				img1.onmouseup = function(){
+					img1.src = "img/view_off.png";
+					psw1.type = "password";
+				}
+				img2.onmousedown = function(){
+					img2.src = "img/view.png";
+					psw2.type = "text";
+				}
+				img2.onmouseup = function(){
+					img2.src = "img/view_off.png";
+					psw2.type = "password";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<form name="myform" method="get" action="#">
+				<ul>
+					<li>
+						<label for="user">用户名</label>
+						<input id="user" name="myuser" type="text" />
+					</li>
+					<li>
+						<label for="psw1">密码</label>
+						<input id="psw1" name="mypsw1" type="password" />
+						<img id="img1" class="img1" src="img/view_off.png" />
+					</li>
+					<li>
+						<label for="psw2">确认密码</label>
+						<input id="psw2" name="mypsw2" type="password" />
+						<img id="img2" class="img1" src="img/view_off.png" />
+					</li>
+					<li>
+						<label for="yzm">验证码</label>
+						<input id="yzm" type="text" />
+						<span id="num" title="点击切换验证码">12AB</span>
+					</li>
+					<li>
+						<input id="btn" type="submit" />
+					</li>
+				</ul>
+			</form>
+		</div>
+	</body>
+</html>

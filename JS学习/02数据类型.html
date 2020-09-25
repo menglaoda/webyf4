@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//定义变量,关键字 var，a1是变量名
+			var a1 ;
+			a1 = 10;//赋值
+			
+			var a2 = 20 ;//定义变量的同时给它赋值
+			var a3=1,a4=5,a5=15;//同时定义多个变量
+			
+			
+			console.log(a1);
+			
+			//typeof 操作符是用来检测变量的数据类型,
+			console.log(typeof a1);//"number"数字
+			
+			var b1 = "hello word";
+			console.log(typeof b1);//"string"字符串
+			
+			var b2;
+			console.log(typeof b2);//"undefined"未定义
+			
+			var b3 = null;
+			console.log(typeof b3);//"object"对象
+			console.log(b3==b2);//"true" 布尔类型
+			
+			var b4 = true;
+			console.log(b4==1);//一个“=”表示赋值，两个“==”表示比较值
+			
+			//科学技术法
+			var b5 = 4.1e5;
+			console.log(b5);
+			
+			
+			//NaN, 即非数值(Not a Number)是一个特殊的值
+			var box1 = 0/0;   
+//			Infinity正无穷
+			var box2 = 12/0;  
+			var box3 = 12/0*0; 
+			console.log("hello"/10);//"NaN"
+			console.log(box1+","+box2+","+box3);
+			
+			//isNaN()函数
+			console.log(isNaN(box3));//"true"
+			
+			//类型转换
+			//parseInt()      是把其它类型转换为整型,取整；
+			var c1 = 10.4;
+			console.log(parseInt(c1));//"10"
+			var c2 = "hello";
+			console.log(typeof parseInt(c2));//"number"
+			
+			//parseFloat()  是把其它类型转换为number（小数）
+			console.log(parseFloat(c1));
+			
+			//四舍五入Math.round(78.566)，是把其它类型转换为number
+			console.log(Math.round(c1));
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

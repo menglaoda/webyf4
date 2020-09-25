@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+//			window对象的部分方法:
+//				alert(text): 弹出提示框(警告框)
+//				confirm(): 创建一个需要用户确认的对话框
+//				prompt(text,defaultInput) :创建一个对话框要求用户输入信息
+//				open(url,name,[options]) : 打开一个新窗口并返回新 window 对象
+//				setInterval(): 设置定时器
+//				clearInterval() : 移除定时器
+//				setTimeOut() : 设置延时器
+//				clearTimeOut(): 移出延时器
+//				close(): 关闭窗口
+//				print(): 调出打印对话框
+
+			//window.alert("hello word");
+//			if(confirm("请点击确定或取消！")){
+//				console.log("点击了确定");
+//			}else{
+//				console.log("点击了取消");
+//			}
+			
+//			var n1 = prompt("请输入一个数字");
+//			console.log(n1);	
+			
+			//open("https://www.baidu.com","baidu","width=400,height=400,top=200,left=200");
+		
+			//创建延时器
+			setTimeout(function(){
+				console.log(1);
+			},1000);
+			
+			setTimeout(fn,2000);
+			function fn(){
+				console.log(2);
+				//close();
+				//window.open("about:blank","_self").close();
+				print();
+			};
+			
+			var timer = setTimeout("console.log(3)",3000);
+			
+			//关闭延时器
+			clearTimeout(timer);
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

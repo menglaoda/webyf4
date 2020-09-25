@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: fixed;
+				top: 40px;
+				left: 8px;
+			}
+		</style>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded",function(){
+				var btn = document.querySelector(".btn");
+				var box = document.querySelector(".box");
+				btn.onclick = function(){
+					var timer = setInterval(function(){
+						//1.目标值
+						var target = 1000;
+						//2.获取当前位置
+						var x1 = box.offsetLeft;
+						//3.给一个速度
+						var speed = 5;
+						//4.开始运动
+						if(x1>=target){
+							clearInterval(timer);
+						}else{
+							box.style.left = x1+speed+"px";
+						}
+					},30)
+				}
+			})
+		</script>
+	</head>
+	<body>
+		<button class="btn">开始运动</button>
+		<div class="box"></div>
+	</body>
+</html>

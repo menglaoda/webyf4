@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("box");
+				var btn = document.getElementById("btn");
+				btn.onclick = function(){
+					var timer;
+					clearInterval(timer);
+					timer = setInterval(function(){
+						box.style.background = "rgb("+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+","+Math.floor(Math.random()*256)+")";
+					},1000)
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box"></div>
+		<button id="btn">改变颜色</button>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				var box = document.getElementById("box");
+				
+				//attributes属性: 返回该元素节点的属性节点集合。
+				console.log(box.attributes);
+				console.log(box.attributes[0]);
+				
+				//nodeType; //1为元素节点，2为属性类型，3为文本节点 
+				console.log(box.attributes[0].nodeType);
+				console.log(box.nodeType);
+				
+				//nodeName; //属性名称 
+				console.log(box.attributes[0].nodeName);
+				
+				//nodeValue; //属性值 
+				console.log(box.attributes["class"].nodeValue);
+				
+				//childNodes: 子节点集合
+				console.log(box.childNodes.length);
+				
+				//firstChild 用于获取当前元素节点的第一个子节点，相当于 childNodes[0]；
+				console.log(box.firstChild);
+				
+				//lastChild 用于获取当前元素节点的最后一个子节点，相当于 childNodes[box.childNodes.length- 1]。
+				console.log(box.lastChild);
+				
+				console.log(box.childNodes[0].nodeValue);//文本节点要用nodeValue,元素节点用innerHTML
+				console.log(box.childNodes[0].innerHTML);//"undefined"
+				console.log(box.childNodes[1].nodeValue);
+				console.log(box.childNodes[1].innerHTML);
+				
+				//parentNode 属性返回该节点的父节点，
+				console.log(box.parentNode);
+				var a1 = document.querySelector(".a1");
+				console.log(a1.parentNode.parentNode);
+				
+				//createElement()方法可以创建一个元素节点。
+				var b1 = document.createElement("b");
+				
+				b1.innerHTML = "哈哈哈哈";
+				
+				//appendChild()方法将一个新节点添加到某个节点的子节点列表的末尾上。 
+				//box.appendChild(b1);
+				
+				//replaceChild()方法可以把节点替换成指定的节点,通过父节点调用
+				a1.parentNode.replaceChild(b1,a1);
+				
+				//removeChild()方法可以删除指定子节点,通过父节点调用, 来删除父元素的子节点
+				var p1 = document.querySelector("p");
+//				p1.parentNode.removeChild(p1);
+				box.removeChild(p1);
+								
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="box" class="box1" title="盒子" name="mybox">
+			<span>12345</span>
+			<h3>hello</h3>
+			<p>
+				<a class="a1" href="#">word</a>
+			</p>
+		</div>
+	</body>
+</html>

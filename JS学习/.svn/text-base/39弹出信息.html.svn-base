@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{
+				width: 400px;
+				padding: 50px 20px;
+				border: solid 10px blue;
+			}
+			button{
+				display: block;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var v1 = document.getElementById("v1");
+				var v2 = document.getElementsByClassName("v2")[0];
+				var v3 = document.getElementsByName("v3")[0];
+				var v4 = document.querySelectorAll("input")[3];
+				var btn = document.getElementsByTagName("button")[0];
+				btn.onclick = function(){
+					alert("名字："+v1.value+",年龄"+v2.value+",学历"+v3.value+"，专业"+v4.value);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<input id="v1" type="text" placeholder="名字" />
+			<input class="v2" type="text" placeholder="年龄" />
+			<input name="v3" type="text" placeholder="学历" />
+			<input  type="text" placeholder="专业" />
+			<button>按钮</button>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//定义一个空数组
+			var arr = new Array();
+			
+			//定义一个长度为10的数组
+			var arr1 = new Array(10);
+			
+			//数组元素为10，20，长度为2
+			var arr2 = new Array(10,20);
+			
+			var arr3 = new Array("hello");
+			
+			//字面量方式定义数组
+			var arr4 = [];//空数组
+			var arr5 = [1,2,3,4,10];
+			console.log(arr5);
+			
+			//length 长度
+			console.log(arr5.length);
+			
+			//通过下标访问数组元素，下标从0开始
+			console.log(arr5[3]);
+			
+			//访问最后一个数组元素
+			console.log(arr5[arr5.length-1]);
+			
+			arr5[2]=30;//可以对数组元素重新赋值
+			console.log(arr5);
+			arr5[5]=100;
+			console.log(arr5);//"1,2,30,4,10,100"
+			arr5.length=2;//可以改变数组长度
+			console.log(arr5);//"1,2"	
+			
+			//遍历数组元素
+			var arr = [11,33,44,55,66,77];
+//			for(var i=0;i<arr.length;i++){
+//				document.write(arr[i]+"<br />");
+//			}
+			
+			//快速遍历 for in 
+			for(i in arr){
+				document.write(arr[i]+"<br />");
+			}
+			
+			//1、求数组中所有元素的和；
+			var s = 0;
+			for(i in arr){
+				s+=arr[i];
+			}
+			console.log(s);
+			
+			//2、让数组中的元素交换位置（重要）
+			var arr1 = [10,20];
+			var a1 =arr1[0];
+			arr1[0]=arr1[1];
+			arr1[1] = a1;
+			console.log(arr1);
+			
+			//3、求数组的最大数和最小数及它们的下标
+			var arr2 = [1,10,22,55,88,0];
+			var max = arr2[0];
+			var maxi = 0;
+			var min = arr2[0];
+			var mini = 0;
+			for(var i=0;i<arr2.length;i++){
+				if(max<arr2[i]){
+					max = arr2[i];
+					maxi=i;
+				}
+				if(min>arr2[i]){
+					min = arr2[i];
+					mini = i;
+				}
+			}
+			console.log("最大数："+max+",最大数的下标："+maxi+"，最小数："+min+",最小数的下标："+mini);
+		
+			//4、将数组[8,9,7,6,5,4]进行升序排序，[4,5,6,7,8,9]
+			var arr3 = [8,9,7,6,5,4];
+			for(var i=0;i<arr3.length;i++){
+				for(var j=0;j<arr3.length-i;j++){
+					if(arr3[j]<arr3[j+1]){
+						var a1 = arr3[j];
+						arr3[j]=arr3[j+1];
+						arr3[j+1]=a1;
+					}
+					
+				}
+			}
+			console.log(arr3);
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

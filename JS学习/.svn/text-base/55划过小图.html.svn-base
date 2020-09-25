@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 590px;
+				height: 475px;
+				border: solid 10px black;
+			}
+			.box img:first-child{
+				width: 330px;
+				height: 330px;
+			}
+			img{
+				width: 100px;
+				height: 100px;
+				float: left;
+				margin: 15px 0px 0px 15px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oimg = document.querySelectorAll("img");
+				for(var i=1;i<oimg.length;i++){
+					oimg[i].onmouseover = function(){
+						oimg[0].src = this.src;
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<img src="img/a.jpg" />
+			<img src="img/a.jpg" />
+			<img src="img/b.jpg" />
+			<img src="img/c.jpg" />
+			<img src="img/d.jpg" />
+			<img src="img/e.jpg" />
+			<img src="img/f.jpg" />
+			<img src="img/g.jpg" />
+			<img src="img/h.jpg" />
+			<img src="img/i.jpg" />
+			<img src="img/j.jpg" />
+			<img src="img/k.jpg" />
+		</div>
+	</body>
+</html>

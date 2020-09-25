@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//在输入框中输入数字, 点击按钮调用函数来判断奇偶性?
+			
+			//文档加载完毕后才后执行
+			window.onload = function(){
+				//1.先获取元素节点
+				var v1 = document.getElementById("v1");
+				var v2 = document.getElementById("v2");
+				var p1 = document.getElementById("p1");
+				//绑定点击事件
+				v2.onclick = function(){
+					//console.log("按钮被点击了");
+					
+					//value(表单控件用value，其它用innerHTML),获取文本框的值
+					//console.log(v1.value);
+					
+					//设置文本框的值
+					//v1.value = 100;
+					
+					
+					//innerHTML
+					//获取p标签的内容
+					//console.log(p1.innerHTML);
+					
+					//设置p标签的内容
+					//p1.innerHTML = "hello  word";
+					fn(v1.value)
+				}
+				
+				//判断奇偶性
+				function fn(n){
+					if(n%2==0){
+						//alert(n+"是偶数");
+						p1.innerHTML = n+"是偶数";
+						
+					}else{
+						//alert(n+"是奇数");
+						p1.innerHTML = n+"是奇数";
+					}
+				}
+				
+			}
+		</script>
+	</head>
+	<body>
+		<input id="v1" type="text" />
+		<input id="v2" type="button" value="按钮"/>
+		<p id="p1"></p>
+	</body>
+	
+</html>
